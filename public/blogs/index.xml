@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lifestyle on Portfolio website for Aida Chushkina</title>
+    <link>/blogs/</link>
+    <description>Recent content in Lifestyle on Portfolio website for Aida Chushkina</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Oct 2017 22:27:21 -0500</lastBuildDate><atom:link href="/blogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Biography</title>
+      <link>/blogs/biog/</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/biog/</guid>
+      <description>I was born in Ufa,big city Russia. It is located on the border between European and Asian part of Russia, near Ural Mountains.I moved to Moscow in 2016 to pursue my undergrad in Economics at Higher School of Economics.
+During undergrad I did a lot of extracurricular activities:1. Being part of Student Club organise conferences, Hult International Business Game and entertainment events, whose audience was up to 500 people</description>
+    </item>
+    
+    <item>
+      <title>Aliquam</title>
+      <link>/blogs/aliquam/</link>
+      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
+      
+      <guid>/blogs/aliquam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>COVID-2019</title>
+      <link>/blogs/covid/</link>
+      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
+      
+      <guid>/blogs/covid/</guid>
+      <description>Challenge 1: CDC COVID-19 Public Use DataLet us revisit the CDC Covid-19 Case Surveillance Data. There are well over 3 million entries of individual, de-identified patient data. Since this is a large file, I suggest you use vroom to load it and you keep cache=TRUE in the chunk options.
+# file contains 11 variables and 3.66m rows and is well over 380Mb. # It will take time to download# URL link to CDC to download dataurl &amp;lt;- &amp;quot;https://data.</description>
+    </item>
+    
+    <item>
+      <title>Trump</title>
+      <link>/blogs/trump/</link>
+      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
+      
+      <guid>/blogs/trump/</guid>
+      <description>Trump’s Approval MarginsAs we saw in class, fivethirtyeight.com has detailed data on all polls that track the president’s approval
+# Import approval polls dataapproval_polllist &amp;lt;- read_csv(here::here(&amp;#39;data&amp;#39;, &amp;#39;approval_polllist.csv&amp;#39;))# or directly off fivethirtyeight website# approval_polllist &amp;lt;- read_csv(&amp;#39;https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv&amp;#39;) glimpse(approval_polllist)## Rows: 15,619## Columns: 22## $ president &amp;lt;chr&amp;gt; &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;,...## $ subgroup &amp;lt;chr&amp;gt; &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All pol...## $ modeldate &amp;lt;chr&amp;gt; &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/20.</description>
+    </item>
+    
+    <item>
+      <title>Tempus</title>
+      <link>/blogs/tempus/</link>
+      <pubDate>Tue, 31 Oct 2017 22:26:13 -0500</pubDate>
+      
+      <guid>/blogs/tempus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Magna</title>
+      <link>/blogs/magna/</link>
+      <pubDate>Tue, 31 Oct 2017 22:26:09 -0500</pubDate>
+      
+      <guid>/blogs/magna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ipsum</title>
+      <link>/blogs/ipsum/</link>
+      <pubDate>Tue, 31 Oct 2017 21:28:43 -0500</pubDate>
+      
+      <guid>/blogs/ipsum/</guid>
+      <description>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</description>
+    </item>
+    
+  </channel>
+</rss>
