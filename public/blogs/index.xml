@@ -18,6 +18,17 @@ During undergrad I did a lot of extracurricular activities:1. Being part of Stu
     </item>
     
     <item>
+      <title>Excess rentals in London bike sharing</title>
+      <link>/blogs/bike/</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/bike/</guid>
+      <description>Excess rentals in London bike sharingIt’s cool to hire bikes for cycling in London! Would you like to know how much bikes have been hired by month and year? Let’s take a look!
+We can get the latest data by running the following
+url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&amp;quot;# Download TFL data to temporary filehttr::GET(url, write_disk(bike.temp &amp;lt;- tempfile(fileext = &amp;quot;.xlsx&amp;quot;)))## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20201022%2Feu-west-1%2Fs3%2Faws4_request&amp;amp;X-Amz-Date=20201022T123446Z&amp;amp;X-Amz-Expires=300&amp;amp;X-Amz-Signature=a8e5772bafb976e3f578a575bb7da40248823b1be67cd4efc1c2382a2271f3da&amp;amp;X-Amz-SignedHeaders=host]## Date: 2020-10-22 12:35## Status: 200## Content-Type: application/vnd.</description>
+    </item>
+    
+    <item>
       <title>Aliquam</title>
       <link>/blogs/aliquam/</link>
       <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
@@ -34,16 +45,6 @@ During undergrad I did a lot of extracurricular activities:1. Being part of Stu
       <guid>/blogs/covid/</guid>
       <description>Challenge 1: CDC COVID-19 Public Use DataLet us revisit the CDC Covid-19 Case Surveillance Data. There are well over 3 million entries of individual, de-identified patient data. Since this is a large file, I suggest you use vroom to load it and you keep cache=TRUE in the chunk options.
 # file contains 11 variables and 3.66m rows and is well over 380Mb. # It will take time to download# URL link to CDC to download dataurl &amp;lt;- &amp;quot;https://data.</description>
-    </item>
-    
-    <item>
-      <title>Trump</title>
-      <link>/blogs/trump/</link>
-      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
-      
-      <guid>/blogs/trump/</guid>
-      <description>Trump’s Approval MarginsAs we saw in class, fivethirtyeight.com has detailed data on all polls that track the president’s approval
-# Import approval polls dataapproval_polllist &amp;lt;- read_csv(here::here(&amp;#39;data&amp;#39;, &amp;#39;approval_polllist.csv&amp;#39;))# or directly off fivethirtyeight website# approval_polllist &amp;lt;- read_csv(&amp;#39;https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv&amp;#39;) glimpse(approval_polllist)## Rows: 15,619## Columns: 22## $ president &amp;lt;chr&amp;gt; &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;,...## $ subgroup &amp;lt;chr&amp;gt; &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All pol...## $ modeldate &amp;lt;chr&amp;gt; &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/20.</description>
     </item>
     
     <item>
@@ -71,6 +72,16 @@ During undergrad I did a lot of extracurricular activities:1. Being part of Stu
       
       <guid>/blogs/ipsum/</guid>
       <description>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</description>
+    </item>
+    
+    <item>
+      <title>Trump</title>
+      <link>/blogs/trump/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/trump/</guid>
+      <description>Trump’s Approval MarginsAs we saw in class, fivethirtyeight.com has detailed data on all polls that track the president’s approval
+# Import approval polls dataapproval_polllist &amp;lt;- read_csv(here::here(&amp;#39;data&amp;#39;, &amp;#39;approval_polllist.csv&amp;#39;))# or directly off fivethirtyeight website# approval_polllist &amp;lt;- read_csv(&amp;#39;https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv&amp;#39;) glimpse(approval_polllist)## Rows: 15,619## Columns: 22## $ president &amp;lt;chr&amp;gt; &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;,...## $ subgroup &amp;lt;chr&amp;gt; &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All pol...## $ modeldate &amp;lt;chr&amp;gt; &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/2020&amp;quot;, &amp;quot;9/27/20.</description>
     </item>
     
   </channel>

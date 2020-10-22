@@ -47,13 +47,13 @@ disqusShortname = ""
       name = "Home"
       url = "#"
 
-    #[[params.navigation.links]]
-      #name = "Blogs"
-      #url = "blogs"
+    [[params.navigation.links]]
+      name = "Biography"
+      url = "blogs/biog"
 
-    #[[params.navigation.links]]
-      #name = "Generic Blog"
-      #url = "blogs/ipsum"
+    [[params.navigation.links]]
+      name = "CV"
+      url = "blogs/CV.pdf"
 
     #[[params.navigation.links]]
       #name = "Elements"
@@ -67,14 +67,14 @@ disqusShortname = ""
     #    url = "UrlOfLink"
 
     #Button Style 1
-    #[[params.navigation.button1]]
-     #name = "Get Started"
-      #url = "blogs"
+    [[params.navigation.button1]]
+     name = "LinkedIn"
+    url = "https://www.linkedin.com/in/aida-chushkina/"
 
     #Button Style 2
-    #[[params.navigation.button2]]
-      #name = "Log In"
-      #url = "#"
+    [[params.navigation.button2]]
+      name = "Instagram"
+      url = "https://www.instagram.com/aida_chushkina/"
 
 
   # Banner section
@@ -97,15 +97,15 @@ disqusShortname = ""
       image = "aida.png"
       url = "blogs/biog"
 
-    #[[params.tiles.showcase]]
-    #title = "How much will 4 nights in Shanghai cost?"
-    #subtitle = "Prediction"
-    #image = "shanghai2.jpg"
-    #url = "blogs/shang"
+    [[params.tiles.showcase]]
+    title = "Excess rentals in London bike sharing"
+    subtitle = "expected vs actual"
+    image = "bike.jpg"
+    url = "blogs/bike"
 
     [[params.tiles.showcase]]
-     title = "How many people approve Trump"
-     subtitle = "Trump vs Hilton"
+     title = "How many people approve of Trump?"
+     subtitle = "Trump vs Clinton"
      image = "pic3.jpg"
      url = "blogs/trump"
 

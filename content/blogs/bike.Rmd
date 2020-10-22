@@ -1,0 +1,152 @@
+---
+categories:
+- ""
+- ""
+date: "2020-10-22"
+draft: false
+image: london.jpg
+keywords: "Bikes"
+slug: bike
+title: Excess rentals in London bike sharing
+---
+
+```{r load-libraries, include=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+```
+
+# Excess rentals in London bike sharing
+
+It's cool to hire bikes for cycling in London! Would you like to know how much bikes have been hired by month and year? Let’s take a look!
+
+We can get the latest data by running the following
+
+```{r get_tfl_data, cache=TRUE,warnings= FALSE, message=FALSE}
+url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp <- tempfile(fileext = ".xlsx")))
+
+# Use read_excel to read it as dataframe
+bike0 <- read_excel(bike.temp,
+                   sheet = "Data",
+                   range = cell_cols("A:B"))
+
+# change dates to get year, month, and week
+bike <- bike0 %>% 
+  clean_names() %>% 
+  rename (bikes_hired = number_of_bicycle_hires) %>% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))
+```
+
+## Bikes hired by month and year
+
+We can easily create a facet grid that plots bikes hired by month and year.
+
+```{r Bikes hired per month,warnings= FALSE, message=FALSE,fig.width=15}
+bike15_20 <- bike %>% filter(year>=2015) %>% mutate(month0 = month(day))
+
+ggplot(bike15_20, aes(x=bikes_hired))+
+  geom_density()+
+  facet_grid(rows=vars(year),cols=vars(month))+
+  labs(title = "Distribution of bikes hired per month",
+       x= 'Bike Rentals', y = "") + 
+  scale_x_continuous(breaks = c(20000, 40000, 60000), 
+                labels = c('20K', '40K', '60K'))+
+  scale_y_continuous(breaks = c()) +
+  theme(legend.position = "none") +
+  theme_bw()+
+  NULL
+```
+
+
+> Look at May and Jun and compare 2020 with the previous years. What's happening?
+
+Yes! Bike Rentals in May and Jun in 2020 dropped significantly from previous years because of the lockdown caused by the covid-pandemic.
+
+
+## Differences between Expected and actual level of bike rentals
+
+Next, let’s calculate the expected number of rentals per month and per week between 2015-2019 by calculating the median number of rentals between 2015-2019. Then we can see how the actual rentals in each week/month of 2020 compares to the expected rentals. Remember, `excess_rentals = actual_rentals - expected_rentals`.
+
+
+Our first plot looks at absolute changes from the expected level of monthly rentals.The blue line is the expected level of rentals, green areas are the positive excess rentals and pinks areas are the negative excess rentals.
+
+```{r monthly_change, warnings= FALSE, message=FALSE,fig.width=12}
+bike15_19 <- bike %>% filter(year>=2015&year<=2019) %>% mutate(month0 = month(day))
+#Calculate the monthly average between 2015-2019 using median 
+expected_monthly_rentals <- bike15_19 %>% group_by(month0) %>% summarise(median_ex=median(bikes_hired))
+#Calculate the acutual monthly average between 2015-2020 using median 
+bike_month <- bike15_20 %>% group_by(year,month0) %>% summarise(median_ac=median(bikes_hired)) 
+#left_join the dataframe
+bike_month_excess <- left_join(bike_month,expected_monthly_rentals,by='month0')
+bike_month_excess <- bike_month_excess %>% mutate (maxline=ifelse(median_ex>median_ac,median_ex,median_ac),
+                                                   minline=ifelse(median_ex<median_ac,median_ex,median_ac))
+
+# replicate the plot with two ribbons using different colors
+ggplot(bike_month_excess,aes(x=month0))+
+  geom_ribbon(aes(ymin=minline,ymax=median_ex),fill='lightpink')+
+  geom_ribbon(aes(ymin=median_ex,ymax=maxline),fill='lightgreen')+
+  geom_line(aes(y=median_ex),color='blue',size=1)+
+  facet_wrap(~year)+
+  labs(title = "Monthly changes in Tfl Bike Rentals",
+       subtitle="Change from monthly average shown in blue \nand calculated between 2015-2019",
+       x= '', y = "Bike Rentals",caption = "Source: Tfl, London Data Store") +
+  scale_x_continuous(breaks = c(1, 2, 3,4,5,6,7,8,9,10,11,12), 
+                labels = c('JAN', 'FEB', 'MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'))+
+  theme(axis.text.x = element_text(size = 8, margin = margin(0,15,0,0)))+
+  NULL
+
+```
+
+
+The second plot looks at percentage changes from the expected level of weekly rentals. Again, green areas are the positive excess rentals by percentage and pinks areas are the negative excess rentals by percentage.The two grey shaded rectangles correspond to the second (weeks 14-26) and fourth (weeks 40-52) quarters.
+
+```{r weekly_change, warnings= FALSE, message=FALSE,fig.width=12}
+#Calculate the weekly average between 2015-2019 using median 
+expected_weekly_rentals <- bike15_19 %>% group_by(week) %>% summarise(median_ex=median(bikes_hired))
+#Calculate the acutual weekly average between 2015-2020 using median 
+bike_week <- bike15_20 %>% group_by(year,week) %>% summarise(median_ac=median(bikes_hired)) 
+#left_join the dataframe
+bike_week_excess <- left_join(bike_week,expected_weekly_rentals,by='week')
+bike_week_excess <- bike_week_excess %>% mutate(bike_week_excess_rate = median_ac/median_ex-1)
+bike_week_excess <- bike_week_excess %>% mutate (maxline=ifelse(bike_week_excess_rate>0,bike_week_excess_rate,0),
+                                                   minline=ifelse(bike_week_excess_rate<0,bike_week_excess_rate,0),
+                                                 whether_pos=ifelse(bike_week_excess_rate>0,'1','0'))
+# replicate the plot with two ribbons and a rug using different colors
+ggplot(bike_week_excess,aes(x=week))+
+  geom_rect(aes(xmin=0,xmax=13,ymin=-Inf,ymax=Inf),fill="white", alpha=0.05)+
+  geom_rect(aes(xmin=13,xmax=26,ymin=-Inf,ymax=Inf),fill="grey", alpha=0.005)+
+  geom_rect(aes(xmin=26,xmax=39,ymin=-Inf,ymax=Inf),fill="white", alpha=0.05)+
+  geom_rect(aes(xmin=39,xmax=53,ymin=-Inf,ymax=Inf),fill="grey", alpha=0.005)+
+  geom_ribbon(aes(ymin=minline,ymax=0),fill='lightpink')+
+  geom_ribbon(aes(ymin=0,ymax=maxline),fill='lightgreen')+
+  geom_line(aes(y=bike_week_excess_rate),size=0.5) +
+  geom_rug(aes(color=whether_pos),sides="b",show.legend = FALSE)+
+  scale_color_manual(values = c("lightpink", "lightgreen"))+
+  facet_wrap(~year)+
+  labs(title = "Weekly changes in Tfl Bike Rentals",
+       subtitle="% change from weekly average \n calculated between 2015-2019",
+       x= '', y = "week",caption = "Source: Tfl, London Data Store") +
+  scale_x_continuous(breaks = c(13,26,39,53), 
+                labels = c('13', '26', '39','53'))+
+  scale_y_continuous(breaks = c(-0.6,-0.3,0,0.3,0.6), 
+                labels = c('-60%', '-30%', '0%','30%','60%'))+
+  theme(axis.text.x = element_text(size = 12, margin = margin(0,15,0,0)))+
+  NULL
+
+
+```
+
+
+
